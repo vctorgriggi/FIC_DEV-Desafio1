@@ -1,0 +1,8 @@
+{
+  "arquivo_atendimentos": "data/atendimentos.csv",
+  "arquivo_categorias": "data/categorias.json",
+  "arquivo_observacoes": "data/observacoes.txt",
+  "diretorio_saida": "output",
+  "separador_csv": ";"
+}
+

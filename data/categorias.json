@@ -1,0 +1,8 @@
+{
+  "Acesso ao AVA": ["ava", "acesso ava", "ambiente virtual", "acesso ao ambiente virtual"],
+  "Instalação de programas": ["instalacao", "instalação", "instalar programa", "software"],
+  "Configuração do Python": ["python", "config python", "configuração python", "ambiente python"],
+  "Senha": ["senha", "password", "redefinir senha", "esqueci a senha"],
+  "Execução de atividades": ["atividade", "execucao", "execução", "erro na atividade"]
+}
+

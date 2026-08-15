@@ -1,0 +1,151 @@
+protocolo;data;email;categoria;status;tempo_minutos;descricao
+SUP-2026-0001;2026-07-02;aluno1@example.com;Ambiente Virtual;aberto;75; Solicitação de suporte número 1  
+SUP-2026-0002;03-07-2026;aluno2@example.com;SOFTWARE;em andamento;40; Solicitação de suporte número 2  
+SUP-2026-0003;2026/07/04;aluno3@example.com;Ambiente Virtual;aberto;156; Solicitação de suporte número 3  
+SUP-2026-0004;05/07/2026;aluno4@example.com;senha;aberto;12; Solicitação de suporte número 4  
+SUP-2026-0005;2026-07-06;aluno5@example.com;Ambiente Virtual;em andamento;64; Solicitação de suporte número 5  
+SUP-2026-0006;07-07-2026;aluno6@example.com;atividade;aberto;148; Solicitação de suporte número 6  
+SUP-2026-0007;2026/07/08;aluno7@example.com;SOFTWARE;RESOLVIDO;61; Solicitação de suporte número 7  
+SUP-2026-0008;09/07/2026;aluno8@example.com;PASSWORD;resolvido;6; Solicitação de suporte número 8  
+SUP-2026-0009;2026-07-10;aluno9@example.com;instalação;RESOLVIDO;92; Solicitação de suporte número 9  
+SUP-2026-0010;11-07-2026;email-invalido;python;em andamento;60; Solicitação de suporte número 10  
+SUP-2026-0011;2026/07/12;aluno11@example.com;Config Python;aberto;28; Solicitação de suporte número 11  
+SUP-2026-0012;13/07/2026;aluno12@example.com;senha;aberto;96; Solicitação de suporte número 12  
+SUP-2026-0013;2026-07-14;aluno13@example.com;Config Python;resolvido;16; Solicitação de suporte número 13  
+SUP-2026-0014;15-07-2026;aluno14@example.com;PASSWORD;aberto;101; Solicitação de suporte número 14  
+SUP-2026-0015;2026/07/16;aluno15@example.com;Ambiente Virtual;resolvido;165; Solicitação de suporte número 15  
+SUP-2026-0016;17/07/2026;aluno16@example.com;Execução;resolvido;152; Solicitação de suporte número 16  
+SUP-2026-0017;2026-07-18;aluno17@example.com;SOFTWARE;aberto;16; Solicitação de suporte número 17  
+SUP-2026-0018;19-07-2026;aluno18@example.com;SOFTWARE;resolvido;25; Solicitação de suporte número 18  
+SUP-2026-0019;2026/07/20;aluno19@example.com;SOFTWARE;aberto;102; Solicitação de suporte número 19  
+SUP-2026-0020;31/02/2026;aluno20@example.com;python;RESOLVIDO;167; Solicitação de suporte número 20  
+SUP-2026-0021;2026-07-22;aluno21@example.com;Config Python;em andamento;99; Solicitação de suporte número 21  
+SUP-2026-0022;23-07-2026;aluno22@example.com;Config Python;em andamento;176; Solicitação de suporte número 22  
+SUP-2026-0023;2026/07/24;aluno23@example.com;python;aberto;160; Solicitação de suporte número 23  
+SUP-2026-0024;25/07/2026;aluno24@example.com;instalação;em andamento;46; Solicitação de suporte número 24  
+SUP-2026-0025;2026-07-26;aluno25@example.com;PASSWORD;RESOLVIDO;74; Solicitação de suporte número 25  
+SUP-2026-0026;27-07-2026;aluno26@example.com;atividade;em andamento;180; Solicitação de suporte número 26  
+SUP-2026-0027;2026/07/28;aluno27@example.com;Config Python;aberto;63; Solicitação de suporte número 27  
+SUP-2026-0028;29/07/2026;aluno28@example.com;ava;resolvido;107; Solicitação de suporte número 28  
+SUP-2026-0029;2026-07-30;aluno29@example.com;python;aberto;59; Solicitação de suporte número 29  
+SUP-2026-0030;31-07-2026;aluno30@example.com;Execução;resolvido;-15; Solicitação de suporte número 30  
+SUP-2026-0031;2026/08/01;aluno31@example.com;PASSWORD;RESOLVIDO;169; Solicitação de suporte número 31  
+SUP-2026-0032;02/08/2026;aluno32@example.com;PASSWORD;em andamento;72; Solicitação de suporte número 32  
+SUP-2026-0033;2026-08-03;aluno33@example.com;instalação;em andamento;148; Solicitação de suporte número 33  
+SUP-2026-0034;04-08-2026;aluno34@example.com;atividade;resolvido;154; Solicitação de suporte número 34  
+SUP-2026-0035;2026/08/05;aluno35@example.com;senha;RESOLVIDO;97; Solicitação de suporte número 35  
+SUP-2026-0036;06/08/2026;aluno36@example.com;SOFTWARE;em andamento;135; Solicitação de suporte número 36  
+SUP-2026-0037;2026-08-07;aluno37@example.com;PASSWORD;aberto;17; Solicitação de suporte número 37  
+SUP-2026-0038;08-08-2026;aluno38@example.com;Ambiente Virtual;em andamento;165; Solicitação de suporte número 38  
+SUP-2026-0039;2026/08/09;aluno39@example.com;instalação;RESOLVIDO;157; Solicitação de suporte número 39  
+SUP-2026-0040;01/07/2026;aluno40@example.com;categoria inexistente;RESOLVIDO;102; Solicitação de suporte número 40  
+SUP-2026-0041;2026-07-02;aluno41@example.com;Execução;RESOLVIDO;140; Solicitação de suporte número 41  
+SUP-2026-0042;03-07-2026;aluno42@example.com;python;aberto;179; Solicitação de suporte número 42  
+SUP-2026-0043;2026/07/04;aluno43@example.com;Ambiente Virtual;resolvido;169; Solicitação de suporte número 43  
+SUP-2026-0044;05/07/2026;aluno44@example.com;Config Python;aberto;80; Solicitação de suporte número 44  
+SUP-2026-0045;2026-07-06;aluno45@example.com;senha;em andamento;121; Solicitação de suporte número 45  
+SUP-2026-0046;07-07-2026;aluno46@example.com;ava;resolvido;133; Solicitação de suporte número 46  
+SUP-2026-0047;2026/07/08;aluno47@example.com;instalação;aberto;165; Solicitação de suporte número 47  
+SUP-2026-0048;09/07/2026;aluno48@example.com;python;em andamento;44; Solicitação de suporte número 48  
+SUP-2026-0049;2026-07-10;aluno49@example.com;Config Python;em andamento;143; Solicitação de suporte número 49  
+SUP-2026-0001;11-07-2026;aluno50@example.com;atividade;aberto;158; Solicitação de suporte número 50  
+SUP-2026-0051;2026/07/12;aluno51@example.com;Config Python;RESOLVIDO;9; Solicitação de suporte número 51  
+SUP-2026-0052;13/07/2026;aluno52@example.com;Ambiente Virtual;resolvido;83; Solicitação de suporte número 52  
+SUP-2026-0053;2026-07-14;aluno53@example.com;SOFTWARE;aberto;66; Solicitação de suporte número 53  
+SUP-2026-0054;15-07-2026;aluno54@example.com;Execução;aberto;26; Solicitação de suporte número 54  
+SUP-2026-0055;2026/07/16;aluno55@example.com;PASSWORD;aberto;141; Solicitação de suporte número 55  
+SUP-2026-0056;17/07/2026;aluno56@example.com;instalação;em andamento;173; Solicitação de suporte número 56  
+SUP-2026-0057;2026-07-18;aluno57@example.com;PASSWORD;em andamento;72; Solicitação de suporte número 57  
+SUP-2026-0058;19-07-2026;aluno58@example.com;atividade;RESOLVIDO;59; Solicitação de suporte número 58  
+SUP-2026-0059;2026/07/20;aluno59@example.com;atividade;em andamento;84; Solicitação de suporte número 59  
+SUP-2026-0060;21/07/2026;;senha;resolvido;117; Solicitação de suporte número 60  
+SUP-2026-0061;2026-07-22;aluno61@example.com;atividade;RESOLVIDO;35; Solicitação de suporte número 61  
+SUP-2026-0062;23-07-2026;aluno62@example.com;SOFTWARE;em andamento;21; Solicitação de suporte número 62  
+SUP-2026-0063;2026/07/24;aluno63@example.com;Config Python;aberto;155; Solicitação de suporte número 63  
+SUP-2026-0064;25/07/2026;aluno64@example.com;atividade;em andamento;155; Solicitação de suporte número 64  
+SUP-2026-0065;2026-07-26;aluno65@example.com;SOFTWARE;aberto;23; Solicitação de suporte número 65  
+SUP-2026-0066;27-07-2026;aluno66@example.com;ava;em andamento;22; Solicitação de suporte número 66  
+SUP-2026-0067;2026/07/28;aluno67@example.com;ava;resolvido;23; Solicitação de suporte número 67  
+SUP-2026-0068;29/07/2026;aluno68@example.com;atividade;em andamento;76; Solicitação de suporte número 68  
+SUP-2026-0069;2026-07-30;aluno69@example.com;PASSWORD;em andamento;143; Solicitação de suporte número 69  
+SUP-2026-0070;31-07-2026;aluno70@example.com;instalação;RESOLVIDO;muito; Solicitação de suporte número 70  
+SUP-2026-0071;2026/08/01;aluno71@example.com;PASSWORD;RESOLVIDO;53; Solicitação de suporte número 71  
+SUP-2026-0072;02/08/2026;aluno72@example.com;Ambiente Virtual;aberto;173; Solicitação de suporte número 72  
+SUP-2026-0073;2026-08-03;aluno73@example.com;senha;resolvido;113; Solicitação de suporte número 73  
+SUP-2026-0074;04-08-2026;aluno74@example.com;senha;RESOLVIDO;18; Solicitação de suporte número 74  
+SUP-2026-0075;2026/08/05;aluno75@example.com;Ambiente Virtual;aberto;108; Solicitação de suporte número 75  
+SUP-2026-0076;06/08/2026;aluno76@example.com;Config Python;aberto;68; Solicitação de suporte número 76  
+SUP-2026-0077;2026-08-07;aluno77@example.com;SOFTWARE;em andamento;142; Solicitação de suporte número 77  
+SUP-2026-0078;08-08-2026;aluno78@example.com;PASSWORD;em andamento;113; Solicitação de suporte número 78  
+SUP-2026-0079;2026/08/09;aluno79@example.com;instalação;resolvido;123; Solicitação de suporte número 79  
+PROTOCOLO-80;01/07/2026;aluno80@example.com;SOFTWARE;aberto;118; Solicitação de suporte número 80  
+SUP-2026-0081;2026-07-02;aluno81@example.com;atividade;aberto;17; Solicitação de suporte número 81  
+SUP-2026-0082;03-07-2026;aluno82@example.com;atividade;aberto;28; Solicitação de suporte número 82  
+SUP-2026-0083;2026/07/04;aluno83@example.com;SOFTWARE;em andamento;109; Solicitação de suporte número 83  
+SUP-2026-0084;05/07/2026;aluno84@example.com;PASSWORD;RESOLVIDO;59; Solicitação de suporte número 84  
+SUP-2026-0085;2026-07-06;aluno85@example.com;senha;aberto;47; Solicitação de suporte número 85  
+SUP-2026-0086;07-07-2026;aluno86@example.com;senha;aberto;104; Solicitação de suporte número 86  
+SUP-2026-0087;2026/07/08;aluno87@example.com;python;RESOLVIDO;78; Solicitação de suporte número 87  
+SUP-2026-0088;09/07/2026;aluno88@example.com;senha;RESOLVIDO;44; Solicitação de suporte número 88  
+SUP-2026-0089;2026-07-10;aluno89@example.com;SOFTWARE;resolvido;60; Solicitação de suporte número 89  
+SUP-2026-0090;;aluno90@example.com;ava;aberto;85; Solicitação de suporte número 90  
+SUP-2026-0091;2026/07/12;aluno91@example.com;ava;aberto;154; Solicitação de suporte número 91  
+SUP-2026-0092;13/07/2026;aluno92@example.com;PASSWORD;em andamento;19; Solicitação de suporte número 92  
+SUP-2026-0093;2026-07-14;aluno93@example.com;atividade;aberto;52; Solicitação de suporte número 93  
+SUP-2026-0094;15-07-2026;aluno94@example.com;Ambiente Virtual;aberto;177; Solicitação de suporte número 94  
+SUP-2026-0095;2026/07/16;aluno95@example.com;SOFTWARE;RESOLVIDO;35; Solicitação de suporte número 95  
+SUP-2026-0096;17/07/2026;aluno96@example.com;Execução;em andamento;153; Solicitação de suporte número 96  
+SUP-2026-0097;2026-07-18;aluno97@example.com;Execução;aberto;163; Solicitação de suporte número 97  
+SUP-2026-0098;19-07-2026;aluno98@example.com;Ambiente Virtual;RESOLVIDO;173; Solicitação de suporte número 98  
+SUP-2026-0099;2026/07/20;aluno99@example.com;Execução;resolvido;71; Solicitação de suporte número 99  
+SUP-2026-0100;21/07/2026;aluno100@example.com;SOFTWARE;resolvido;2000; Solicitação de suporte número 100  
+SUP-2026-0101;2026-07-22;aluno101@example.com;python;RESOLVIDO;38; Solicitação de suporte número 101  
+SUP-2026-0102;23-07-2026;aluno102@example.com;python;RESOLVIDO;85; Solicitação de suporte número 102  
+SUP-2026-0103;2026/07/24;aluno103@example.com;Ambiente Virtual;aberto;122; Solicitação de suporte número 103  
+SUP-2026-0104;25/07/2026;aluno104@example.com;Execução;aberto;23; Solicitação de suporte número 104  
+SUP-2026-0105;2026-07-26;aluno105@example.com;atividade;em andamento;134; Solicitação de suporte número 105  
+SUP-2026-0106;27-07-2026;aluno106@example.com;python;em andamento;94; Solicitação de suporte número 106  
+SUP-2026-0107;2026/07/28;aluno107@example.com;Ambiente Virtual;em andamento;99; Solicitação de suporte número 107  
+SUP-2026-0108;29/07/2026;aluno108@example.com;python;em andamento;117; Solicitação de suporte número 108  
+SUP-2026-0109;2026-07-30;aluno109@example.com;atividade;resolvido;161; Solicitação de suporte número 109  
+SUP-2026-0110;31-07-2026;aluno110@example.com;;aberto;175; Solicitação de suporte número 110  
+SUP-2026-0111;2026/08/01;aluno111@example.com;atividade;resolvido;174; Solicitação de suporte número 111  
+SUP-2026-0112;02/08/2026;aluno112@example.com;Ambiente Virtual;em andamento;72; Solicitação de suporte número 112  
+SUP-2026-0113;2026-08-03;aluno113@example.com;Ambiente Virtual;aberto;146; Solicitação de suporte número 113  
+SUP-2026-0114;04-08-2026;aluno114@example.com;instalação;resolvido;77; Solicitação de suporte número 114  
+SUP-2026-0115;2026/08/05;aluno115@example.com;Execução;em andamento;92; Solicitação de suporte número 115  
+SUP-2026-0116;06/08/2026;aluno116@example.com;SOFTWARE;resolvido;134; Solicitação de suporte número 116  
+SUP-2026-0117;2026-08-07;aluno117@example.com;PASSWORD;resolvido;18; Solicitação de suporte número 117  
+SUP-2026-0118;08-08-2026;aluno118@example.com;Ambiente Virtual;RESOLVIDO;75; Solicitação de suporte número 118  
+SUP-2026-0119;2026/08/09;aluno119@example.com;ava;aberto;90; Solicitação de suporte número 119  
+SUP-2026-0120;01/07/2026;nome@dominio;instalação;resolvido;46; Solicitação de suporte número 120  
+SUP-2026-0121;2026-07-02;aluno121@example.com;PASSWORD;RESOLVIDO;148; Solicitação de suporte número 121  
+SUP-2026-0122;03-07-2026;aluno122@example.com;ava;aberto;24; Solicitação de suporte número 122  
+SUP-2026-0123;2026/07/04;aluno123@example.com;instalação;aberto;99; Solicitação de suporte número 123  
+SUP-2026-0124;05/07/2026;aluno124@example.com;Execução;em andamento;115; Solicitação de suporte número 124  
+SUP-2026-0125;2026-07-06;aluno125@example.com;instalação;aberto;83; Solicitação de suporte número 125  
+SUP-2026-0126;07-07-2026;aluno126@example.com;Config Python;aberto;96; Solicitação de suporte número 126  
+SUP-2026-0127;2026/07/08;aluno127@example.com;SOFTWARE;em andamento;175; Solicitação de suporte número 127  
+SUP-2026-0128;09/07/2026;aluno128@example.com;Ambiente Virtual;resolvido;148; Solicitação de suporte número 128  
+SUP-2026-0129;2026-07-10;aluno129@example.com;senha;em andamento;65; Solicitação de suporte número 129  
+SUP-2026-0130;11-07-2026;aluno130@example.com;instalação;em andamento;110; Solicitação de suporte número 130  
+SUP-2026-0131;2026/07/12;aluno131@example.com;ava;em andamento;90; Solicitação de suporte número 131  
+SUP-2026-0132;13/07/2026;aluno132@example.com;senha;em andamento;73; Solicitação de suporte número 132  
+SUP-2026-0133;2026-07-14;aluno133@example.com;instalação;aberto;102; Solicitação de suporte número 133  
+SUP-2026-0134;15-07-2026;aluno134@example.com;ava;RESOLVIDO;61; Solicitação de suporte número 134  
+SUP-2026-0135;2026/07/16;aluno135@example.com;SOFTWARE;RESOLVIDO;94; Solicitação de suporte número 135  
+SUP-2026-0136;17/07/2026;aluno136@example.com;python;em andamento;62; Solicitação de suporte número 136  
+SUP-2026-0137;2026-07-18;aluno137@example.com;ava;em andamento;107; Solicitação de suporte número 137  
+SUP-2026-0138;19-07-2026;aluno138@example.com;Config Python;resolvido;22; Solicitação de suporte número 138  
+SUP-2026-0139;2026/07/20;aluno139@example.com;python;resolvido;169; Solicitação de suporte número 139  
+SUP-2026-0140;21/07/2026;aluno140@example.com;atividade;RESOLVIDO;178; Solicitação de suporte número 140  
+SUP-2026-0141;2026-07-22;aluno141@example.com;atividade;resolvido;12; Solicitação de suporte número 141  
+SUP-2026-0142;23-07-2026;aluno142@example.com;Ambiente Virtual;resolvido;50; Solicitação de suporte número 142  
+SUP-2026-0143;2026/07/24;aluno143@example.com;Execução;resolvido;14; Solicitação de suporte número 143  
+SUP-2026-0144;25/07/2026;aluno144@example.com;Ambiente Virtual;RESOLVIDO;93; Solicitação de suporte número 144  
+SUP-2026-0145;2026-07-26;aluno145@example.com;Config Python;RESOLVIDO;160; Solicitação de suporte número 145  
+SUP-2026-0146;27-07-2026;aluno146@example.com;atividade;aberto;103; Solicitação de suporte número 146  
+SUP-2026-0147;2026/07/28;aluno147@example.com;Execução;em andamento;70; Solicitação de suporte número 147  
+SUP-2026-0148;29/07/2026;aluno148@example.com;ava;RESOLVIDO;5; Solicitação de suporte número 148  
+SUP-2026-0149;2026-07-30;aluno149@example.com;atividade;em andamento;98; Solicitação de suporte número 149  
+SUP-2026-0150;31-07-2026;aluno150@example.com;senha;aberto;175; Solicitação de suporte número 150  
