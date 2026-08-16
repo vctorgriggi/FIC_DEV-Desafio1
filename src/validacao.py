@@ -1,12 +1,22 @@
 import re
 from datetime import datetime
 
+from src.exceptions.exceptions import (
+    CampoObrigatorioError,
+    DataInvalidaError,
+    EmailInvalidoError,
+    RegistroInvalidoError,
+    TempoInvalidoError,
+)
+from src.processamento import mapear_categoria
+
 # Regras de validação
+# Categoria foi removida pois será tratada na função mapear_categoria
+# "categoria sem correspondência no categorias.json — entra como Não classificada;"
 CAMPOS_OBRIGATORIOS = (
     "protocolo",
     "data",
     "email",
-    "categoria",
     "status",
     "tempo_minutos",
 )
@@ -17,35 +27,6 @@ PADRAO_EMAIL = re.compile(r"^[\w.+-]+@[\w-]+(?:\.[\w-]+)*\.[a-zA-Z]{2,}$")
 FORMATOS_DATA = ("%Y-%m-%d", "%d-%m-%Y", "%Y/%m/%d", "%d/%m/%Y")
 
 TEMPO_MIN = 1
-
-
-# Exceções customizadas
-class RegistroInvalidoError(Exception):
-    """Classe base para os erros de validação de um atendimento."""
-
-
-class CampoObrigatorioError(RegistroInvalidoError):
-    def __init__(self, campo: str):
-        self.campo = campo
-        super().__init__(f"campo '{campo}' obrigatório e vazio")
-
-
-class EmailInvalidoError(RegistroInvalidoError):
-    def __init__(self, valor: str):
-        self.valor = valor
-        super().__init__(f"e-mail '{valor}' em formato inválido")
-
-
-class DataInvalidaError(RegistroInvalidoError):
-    def __init__(self, valor: str):
-        self.valor = valor
-        super().__init__(f"data '{valor}' em formato não reconhecido")
-
-
-class TempoInvalidoError(RegistroInvalidoError):
-    def __init__(self, valor: str):
-        self.valor = valor
-        super().__init__(f"tempo '{valor}' inválido, esperado minutos > 0")
 
 
 # Validações de campo
@@ -85,8 +66,12 @@ def converter_tempo(valor: str) -> int:
     return minutos
 
 
+def converter_status(status: str) -> str:
+    return status.lower().strip().capitalize()
+
+
 # Validação do registro completo
-def validar_registro(registro: dict) -> dict:
+def validar_registro(registro: dict, categorias: dict) -> dict:
     """Valida uma linha do CSV e devolve o registro já convertido.
 
     Returns:
@@ -107,15 +92,18 @@ def validar_registro(registro: dict) -> dict:
             raise CampoObrigatorioError(chave)
 
     email = campos["email"].lower()
+
     if not email_valido(email):
         raise EmailInvalidoError(email)
+
+    categoria_bruta = (registro.get("categoria") or "").strip() or None
 
     return {
         "protocolo": campos["protocolo"].upper(),
         "data": converter_data(campos["data"]),
         "email": email,
-        "categoria": campos["categoria"],
-        "status": campos["status"],
+        "categoria": mapear_categoria(categoria_bruta, categorias),
+        "status": converter_status(campos["status"]),
         "tempo_minutos": converter_tempo(campos["tempo_minutos"]),
         "descricao": (registro.get("descricao") or "").strip(),
     }
