@@ -84,18 +84,18 @@ O que dá pra aproveitar, aproveitamos, registrando advertência no log:
     - [✓] tratar valores ausentes;
     - [✓] eliminar duplicidades pelo protocolo.
 
-[ ] - Análise
+[✓] - Análise
   > O sistema deverá produzir indicadores estatísticos utilizando Pandas e NumPy.
 
 [✓] - Visualização
   > O sistema deverá gerar e salvar pelo menos dois gráficos em formato PNG.
 
-[] - Exportação
+[✓] - Exportação
   > O sistema deverá gerar:
   
-  - [] um CSV com os dados tratados;
-  - [] um JSON com o resumo dos indicadores;
-  - [] um arquivo de log com os problemas encontrados.
+  - [✓] um CSV com os dados tratados;
+  - [✓] um JSON com o resumo dos indicadores;
+  - [✓] um arquivo de log com os problemas encontrados.
 
 [] - Tolerância a falhas
   > A ocorrência de uma linha inválida não poderá encerrar toda a aplicação.

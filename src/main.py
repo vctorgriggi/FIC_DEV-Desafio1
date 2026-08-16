@@ -210,9 +210,11 @@ def main() -> None:
     exibir_observacoes(protocolos, telefones)
 
     estatisticas = processamento.calcular_estatisticas(
-        df_tratado, len(rejeitados), len(validos)
+        df_tratado, len(rejeitados), len(brutos)
     )
+    
     relatorios.gerar_json(estatisticas, caminhos["saida"] / "estatisticas.json")
+    relatorios.gerar_csv(df_tratado, caminhos["saida"] / "atendimentos.csv")
     
     print(f"Log de advertências gravado em: {caminhos['saida'] / 'erros.log'}")
     logger.info("=== Fim da execução ===")

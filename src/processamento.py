@@ -13,7 +13,7 @@ COLUNAS_TEXTO = ("protocolo", "email", "categoria", "status", "descricao")
 def _mapa_sinonimos(categorias: dict) -> dict:
     """Inverte {oficial: [sinônimos]} em {sinônimo em minúsculo: oficial}."""
     mapa: dict[str, str] = {}
-    
+
     for oficial, sinonimos in categorias.items():
         mapa[oficial.strip().lower()] = oficial
         for sinonimo in sinonimos:
@@ -48,7 +48,6 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
 
     df["protocolo"] = df["protocolo"].str.upper()
     df["email"] = df["email"].str.lower()
-    df["status"] = df["status"].str.lower()
 
     df["descricao"] = df["descricao"].replace("", np.nan).fillna("Sem descrição")
 
@@ -79,7 +78,8 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
     )
     return df
 
-def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos:int) -> dict:
+
+def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos: int) -> dict:
     """Calcula estatísticas sobre o DataFrame tratado.
 
     Returns:
@@ -90,26 +90,30 @@ def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos:int) -> dict:
         "atendimentos_rejeitados": rejeitados,
         "atendimentos_validos": len(df),
     }
-    
+
     # Quantidade total de atendimentos;
     estatisticas["atendimentos_total"] = len(df)
 
     # Atendimentos por categoria;
-    estatisticas["atendimentos_por_categoria"] = df["categoria"].value_counts().to_dict()
-    
+    estatisticas["atendimentos_por_categoria"] = (
+        df["categoria"].value_counts().to_dict()
+    )
+
     # Atendimentos por status;
     estatisticas["atendimentos_por_status"] = df["status"].value_counts().to_dict()
-    
+
     # Tempo médio de atendimento;
     estatisticas["tempo_medio_de_atendimento"] = df["tempo_minutos"].mean()
-    
+
     # Tempo médio de atendimento por categoria;
-    estatisticas["tempo_medio_por_categoria"] = df.groupby("categoria")["tempo_minutos"].mean().to_dict()
-    
+    estatisticas["tempo_medio_por_categoria"] = (
+        df.groupby("categoria")["tempo_minutos"].mean().to_dict()
+    )
+
     # Percentual de atendimentos rejeitados;
     estatisticas["percentual_de_atendimentos_rejeitados"] = (rejeitados / lidos) * 100
-    
+
     # Categoria mais frequente;
     estatisticas["categoria_mais_frequente"] = df["categoria"].value_counts().idxmax()
-    
+
     return estatisticas

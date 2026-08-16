@@ -1,0 +1,30 @@
+{
+    "atendimentos_lidos": 150,
+    "atendimentos_rejeitados": 7,
+    "atendimentos_validos": 142,
+    "atendimentos_total": 142,
+    "atendimentos_por_categoria": {
+        "Acesso ao AVA": 30,
+        "Instalação de programas": 30,
+        "Execução de atividades": 29,
+        "Senha": 27,
+        "Configuração do Python": 24,
+        "Não classificada": 2
+    },
+    "atendimentos_por_status": {
+        "resolvido": 55,
+        "aberto": 45,
+        "em andamento": 42
+    },
+    "tempo_medio_de_atendimento": 108.26760563380282,
+    "tempo_medio_por_categoria": {
+        "Acesso ao AVA": 104.3,
+        "Configuração do Python": 91.66666666666667,
+        "Execução de atividades": 98.86206896551724,
+        "Instalação de programas": 157.7,
+        "Não classificada": 138.5,
+        "Senha": 80.37037037037037
+    },
+    "percentual_de_atendimentos_rejeitados": 4.666666666666667,
+    "categoria_mais_frequente": "Acesso ao AVA"
+}

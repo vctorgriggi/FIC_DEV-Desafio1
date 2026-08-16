@@ -65,7 +65,7 @@ def converter_tempo(valor: str) -> int:
     return minutos
 
 def converter_status(status: str) -> str:
-    return status.lower().strip().capitalize()
+    return status.lower().strip()
 
 # Validação do registro completo
 def validar_registro(registro: dict) -> dict:
