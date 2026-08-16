@@ -1,41 +1,80 @@
 import logging
 
+import numpy as np
 import pandas as pd
 
 logger = logging.getLogger("suporte.processamento")
 
 CATEGORIA_PADRAO = "Não classificada"
 
+COLUNAS_TEXTO = ("protocolo", "email", "categoria", "status", "descricao")
 
-def mapear_categoria(categoria: str | None, categorias: dict) -> str:
-    """Mapeia a categoria informada para a categoria padrão se não for encontrada.
+
+def _mapa_sinonimos(categorias: dict) -> dict:
+    """Inverte {oficial: [sinônimos]} em {sinônimo em minúsculo: oficial}."""
+    mapa: dict[str, str] = {}
+    for oficial, sinonimos in categorias.items():
+        mapa[oficial.strip().lower()] = oficial
+        for sinonimo in sinonimos:
+            mapa[sinonimo.strip().lower()] = oficial
+    return mapa
+
+
+def padronizar_categoria(categoria: str, mapa: dict) -> str:
+    """Traduz uma categoria livre para o nome oficial em categorias.json.
+
+    Sem correspondência no mapa, cai em CATEGORIA_PADRAO ("Não classificada")
+    em vez de descartar o atendimento.
+    """
+    return mapa.get(categoria.strip().lower(), CATEGORIA_PADRAO)
+
+
+def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
+    """Limpa e padroniza os atendimentos já validados.
+
+    Aplica, nessa ordem: remoção de espaços supérfluos, uniformização de
+    caixa (protocolo em maiúsculas, e-mail e status em minúsculas),
+    padronização de categoria via categorias.json, preenchimento de
+    descrição ausente, conversão da data para datetime e remoção de
+    protocolos duplicados (mantendo a primeira ocorrência).
 
     Returns:
-        A categoria padrão se não for encontrada, caso contrário, a categoria original.
+        DataFrame tratado, pronto para análise e geração de gráficos.
     """
+    df = pd.DataFrame(registros)
 
-    for padrao, alternativas in categorias.items():
-        if categoria is None:
-            return CATEGORIA_PADRAO
-        elif categoria.lower() in alternativas:
-            return padrao
+    for coluna in COLUNAS_TEXTO:
+        df[coluna] = df[coluna].astype(str).str.strip()
 
-    return CATEGORIA_PADRAO
+    df["protocolo"] = df["protocolo"].str.upper()
+    df["email"] = df["email"].str.lower()
+    df["status"] = df["status"].str.lower()
 
+    df["descricao"] = df["descricao"].replace("", np.nan).fillna("Sem descrição")
 
-def eliminar_duplicatas(validos: list[dict]) -> pd.DataFrame:
-    """Mantém só a primeira ocorrência de cada protocolo."""
-    df = pd.DataFrame(validos)
-    duplicados = df[df.duplicated(subset="protocolo", keep="first")]
-    for protocolo in duplicados["protocolo"]:
+    mapa = _mapa_sinonimos(categorias)
+    df["categoria"] = df["categoria"].apply(lambda c: padronizar_categoria(c, mapa))
+    nao_classificados = int((df["categoria"] == CATEGORIA_PADRAO).sum())
+    if nao_classificados:
         logger.warning(
-            "Protocolo '%s' duplicado; mantida a primeira ocorrência",
-            protocolo,
+            "%d atendimento(s) com categoria sem correspondência -> '%s'",
+            nao_classificados,
+            CATEGORIA_PADRAO,
         )
-    return df.drop_duplicates(subset="protocolo", keep="first")
 
+    df["data"] = pd.to_datetime(df["data"], format="%Y-%m-%d")
+    df["tempo_minutos"] = df["tempo_minutos"].astype(int)
 
-if __name__ == "__main__":
-    print(mapear_categoria("acesso ao ambiente VIRTUAL"))
-    print(mapear_categoria("CATEGORIA INVÁLIDA"))
-    print(mapear_categoria(None))
+    antes = len(df)
+    df = df.drop_duplicates(subset="protocolo", keep="first").reset_index(drop=True)
+    duplicados = antes - len(df)
+    if duplicados:
+        logger.warning(
+            "%d protocolo(s) duplicado(s) removido(s), mantida a primeira ocorrência",
+            duplicados,
+        )
+
+    logger.info(
+        "Tratamento concluído: %d atendimento(s) após limpeza e deduplicação", len(df)
+    )
+    return df

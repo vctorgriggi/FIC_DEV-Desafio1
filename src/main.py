@@ -2,7 +2,7 @@ import logging
 import sys
 from pathlib import Path
 
-from src import leitura, processamento
+from src import leitura, processamento, relatorios
 from src.leitura import ArquivoAusenteError
 from src.validacao import RegistroInvalidoError, protocolo_valido, validar_registro
 
@@ -126,6 +126,21 @@ def exibir_resumo_validacao(validos: list[dict], rejeitados: list[dict]) -> None
     print(f"{sep}\n")
 
 
+def exibir_resumo_tratamento(antes: int, df_tratado) -> None:
+    sep = "=" * 70
+    depois = len(df_tratado)
+    nao_classificados = int((df_tratado["categoria"] == processamento.CATEGORIA_PADRAO).sum())
+
+    print(sep)
+    print(" TRATAMENTO DOS DADOS")
+    print(sep)
+    print(f" Válidos antes do tratamento : {antes}")
+    print(f" Duplicidades removidas      : {antes - depois}")
+    print(f" Registros após tratamento   : {depois}")
+    print(f" Categoria não classificada  : {nao_classificados}")
+    print(f"{sep}\n")
+
+
 def exibir_observacoes(protocolos: list[str], telefones: list[str]) -> None:
     sep = "=" * 70
 
@@ -173,7 +188,12 @@ def main() -> None:
     logger.info("%d válidos, %d rejeitados", len(validos), len(rejeitados))
     exibir_resumo_validacao(validos, rejeitados)
 
-    # Extrai os protocolos e telefones das observações.
+    df_tratado = processamento.tratar_dados(validos, categorias)
+    exibir_resumo_tratamento(len(validos), df_tratado)
+
+    graficos = relatorios.gerar_graficos(df_tratado, caminhos["saida"] / "graficos")
+    print(f"{len(graficos)} gráfico(s) salvo(s) em: {caminhos['saida'] / 'graficos'}\n")
+
     texto = leitura.ler_observacoes(caminhos["observacoes"])
     protocolos = leitura.extrair_protocolos(texto)
     telefones = leitura.extrair_telefones(texto)
