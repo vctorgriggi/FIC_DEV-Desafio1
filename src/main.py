@@ -6,12 +6,28 @@ from src import leitura, processamento, relatorios
 from src.leitura import ArquivoAusenteError
 from src.validacao import RegistroInvalidoError, protocolo_valido, validar_registro
 
+"""
+    Descrição do problema:
+    
+    A coordenação do curso FIC_DEV recebe solicitações de suporte relacionadas a acesso ao ambiente virtual, instalação de programas, configuração do Python, problemas com senhas e dificuldades na execução das atividades.
+    Os atendimentos são registrados em arquivos provenientes de diferentes fontes. Entretanto, os dados apresentam problemas como:
+        - campos vazios;
+        - categorias escritas de maneiras diferentes;
+        - datas em formatos distintos;
+        - tempos de atendimento inválidos;
+        - e-mails incorretos;
+        - registros duplicados;
+        - dados armazenados em CSV, JSON e TXT.
+"""
+
+
 RAIZ = Path(__file__).resolve().parent.parent
 CAMINHO_CONFIG = RAIZ / "data" / "config.json"
 
 
 # Infraestrutura
 def preparar_diretorios(saida: Path) -> None:
+    # Preparação dos diretórios de saída, criando a pasta de saída e a pasta de gráficos se não existirem.
     saida.mkdir(parents=True, exist_ok=True)
     (saida / "graficos").mkdir(exist_ok=True)
 
@@ -43,7 +59,7 @@ def configurar_logger(caminho_log: Path) -> logging.Logger:
 
 
 # Etapa de validação
-def validar_todos(registros: list[dict]) -> tuple[list[dict], list[dict]]:
+def validar_todos(registros: list[dict], categorias: dict) -> tuple[list[dict], list[dict]]:
     """Valida a lista inteira sem deixar uma linha ruim derrubar a execução.
 
     Returns:
@@ -57,7 +73,7 @@ def validar_todos(registros: list[dict]) -> tuple[list[dict], list[dict]]:
     # start=2 porque a linha 1 do arquivo é o cabeçalho
     for linha, registro in enumerate(registros, start=2):
         try:
-            atendimento = validar_registro(registro)
+            atendimento = validar_registro(registro, categorias)
 
         except RegistroInvalidoError as e:
             protocolo = (registro.get("protocolo") or "?").strip()
@@ -139,6 +155,7 @@ def exibir_observacoes(protocolos: list[str], telefones: list[str]) -> None:
 # Pipeline
 def main() -> None:
     try:
+        # Carrega a configuração do arquivo de configuração.
         config = leitura.carregar_config(CAMINHO_CONFIG)
         caminhos = leitura.resolver_caminhos(config, RAIZ)
         leitura.verificar_entradas(caminhos)
@@ -147,7 +164,10 @@ def main() -> None:
         print(f"Erro de configuração: {e}", file=sys.stderr)
         sys.exit(1)
 
+    # Prepara os diretórios de saída.
     preparar_diretorios(caminhos["saida"])
+
+    # Configura o logger.
     logger = configurar_logger(caminhos["saida"] / "erros.log")
     logger.info("=== Início da execução ===")
 
@@ -156,14 +176,15 @@ def main() -> None:
         brutos = leitura.ler_atendimentos(
             caminhos["atendimentos"], config["separador_csv"]
         )
+
     except ArquivoAusenteError as e:
         logger.error("Falha na leitura dos dados: %s", e)
         sys.exit(1)
 
-    logger.info("%d linhas lidas do CSV", len(brutos))
     logger.info("%d categorias oficiais carregadas", len(categorias))
+    logger.info("%d linhas lidas do CSV", len(brutos))
 
-    validos, rejeitados = validar_todos(brutos)
+    validos, rejeitados = validar_todos(brutos, categorias)
     logger.info("%d válidos, %d rejeitados", len(validos), len(rejeitados))
     exibir_resumo_validacao(validos, rejeitados)
 
@@ -176,16 +197,24 @@ def main() -> None:
     texto = leitura.ler_observacoes(caminhos["observacoes"])
     protocolos = leitura.extrair_protocolos(texto)
     telefones = leitura.extrair_telefones(texto)
+    
+    # Registra o número de protocolos e telefones extraídos.
     logger.info(
         "Observações: %d protocolos e %d telefones extraídos",
         len(protocolos),
         len(telefones),
     )
+    
     exibir_observacoes(protocolos, telefones)
 
     print(f"Log de advertências gravado em: {caminhos['saida'] / 'erros.log'}")
     logger.info("=== Fim da execução ===")
 
+    df = processamento.eliminar_duplicatas(validos)
+    print(df)
+    logger.info("%d atendimentos únicos", len(df))
+
+    
 
 if __name__ == "__main__":
     main()
