@@ -60,3 +60,42 @@ O que dá pra aproveitar, aproveitamos, registrando advertência no log:
 - **protocolo repetido** (`SUP-2026-0001`) — fica só a primeira ocorrência.
 
 ## Uso de ferramentas de IA
+
+> Definir
+
+## Requisitos Funcionais
+
+[✓] - Inicialização
+  > O sistema deverá ser executado pelo comando: python -m src.main
+
+[✓] - Leitura dos dados
+  > O sistema deverá ler os arquivos CSV, JSON e TXT indicados no arquivo de configuração.
+
+[✓] - Validação
+  > Cada registro deverá ser classificado como válido ou inválido. A aplicação deverá apresentar o motivo da rejeição de registros inválidos.
+
+[ ] - Tratamento dos dados
+  > O sistema deverá:
+  
+    - [] remover espaços desnecessários;
+    - [] uniformizar maiúsculas e minúsculas;
+    - [] padronizar categorias;
+    - [] converter datas;
+    - [] tratar valores ausentes;
+    - [] eliminar duplicidades pelo protocolo.
+
+[ ] - Análise
+  > O sistema deverá produzir indicadores estatísticos utilizando Pandas e NumPy.
+
+[] - Visualização
+  > O sistema deverá gerar e salvar pelo menos dois gráficos em formato PNG.
+
+[] - Exportação
+  > O sistema deverá gerar:
+  
+  - [] um CSV com os dados tratados;
+  - [] um JSON com o resumo dos indicadores;
+  - [] um arquivo de log com os problemas encontrados.
+
+[] - Tolerância a falhas
+  > A ocorrência de uma linha inválida não poderá encerrar toda a aplicação.
