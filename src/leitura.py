@@ -4,6 +4,8 @@ import logging
 import re
 from pathlib import Path
 
+from src.exceptions.exceptions import ArquivoAusenteError
+
 logger = logging.getLogger("suporte.leitura")
 
 # Padrões do arquivo de observações
@@ -18,11 +20,6 @@ PADRAO_PROTOCOLO = re.compile(
 PADRAO_TELEFONE = re.compile(r"\(?\d{2}\)?[\s.-]?9?[\s.-]?\d{4}[\s.-]?\d{4}")
 
 
-# Exceção do módulo
-class ArquivoAusenteError(Exception):
-    """Arquivo obrigatório não encontrado ou ilegível."""
-
-
 # Configuração e estrutura de pastas
 def carregar_config(caminho: Path) -> dict:
     """Lê o arquivo de configuração em JSON.
@@ -30,6 +27,7 @@ def carregar_config(caminho: Path) -> dict:
     Raises:
         ArquivoAusenteError: Se o arquivo não existir ou o JSON for inválido.
     """
+
     try:
         with open(caminho, encoding="utf-8") as f:
             config = json.load(f)
