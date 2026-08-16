@@ -13,6 +13,7 @@ COLUNAS_TEXTO = ("protocolo", "email", "categoria", "status", "descricao")
 def _mapa_sinonimos(categorias: dict) -> dict:
     """Inverte {oficial: [sinônimos]} em {sinônimo em minúsculo: oficial}."""
     mapa: dict[str, str] = {}
+    
     for oficial, sinonimos in categorias.items():
         mapa[oficial.strip().lower()] = oficial
         for sinonimo in sinonimos:
@@ -32,9 +33,8 @@ def padronizar_categoria(categoria: str, mapa: dict) -> str:
 def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
     """Limpa e padroniza os atendimentos já validados.
 
-    Aplica, nessa ordem: remoção de espaços supérfluos, uniformização de
-    caixa (protocolo em maiúsculas, e-mail e status em minúsculas),
-    padronização de categoria via categorias.json, preenchimento de
+    Aplica, nessa ordem: remoção de espaços, uniformização de
+    caixa, padronização de categoria, preenchimento de
     descrição ausente, conversão da data para datetime e remoção de
     protocolos duplicados (mantendo a primeira ocorrência).
 
@@ -78,3 +78,38 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
         "Tratamento concluído: %d atendimento(s) após limpeza e deduplicação", len(df)
     )
     return df
+
+def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos:int) -> dict:
+    """Calcula estatísticas sobre o DataFrame tratado.
+
+    Returns:
+        Dicionário com as estatísticas calculadas.
+    """
+    estatisticas = {
+        "atendimentos_lidos": lidos,
+        "atendimentos_rejeitados": rejeitados,
+        "atendimentos_validos": len(df),
+    }
+    
+    # Quantidade total de atendimentos;
+    estatisticas["atendimentos_total"] = len(df)
+
+    # Atendimentos por categoria;
+    estatisticas["atendimentos_por_categoria"] = df["categoria"].value_counts().to_dict()
+    
+    # Atendimentos por status;
+    estatisticas["atendimentos_por_status"] = df["status"].value_counts().to_dict()
+    
+    # Tempo médio de atendimento;
+    estatisticas["tempo_medio_de_atendimento"] = df["tempo_minutos"].mean()
+    
+    # Tempo médio de atendimento por categoria;
+    estatisticas["tempo_medio_por_categoria"] = df.groupby("categoria")["tempo_minutos"].mean().to_dict()
+    
+    # Percentual de atendimentos rejeitados;
+    estatisticas["percentual_de_atendimentos_rejeitados"] = (rejeitados / lidos) * 100
+    
+    # Categoria mais frequente;
+    estatisticas["categoria_mais_frequente"] = df["categoria"].value_counts().idxmax()
+    
+    return estatisticas

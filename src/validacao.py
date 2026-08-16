@@ -8,11 +8,10 @@ from src.exceptions.exceptions import (
     RegistroInvalidoError,
     TempoInvalidoError,
 )
-from src.processamento import mapear_categoria
 
 # Regras de validação
-# Categoria foi removida pois será tratada na função mapear_categoria
-# "categoria sem correspondência no categorias.json — entra como Não classificada;"
+# Categoria vazia não rejeita o registro: o tratamento mapeia para
+# "Não classificada" quando não há correspondência em categorias.json.
 CAMPOS_OBRIGATORIOS = (
     "protocolo",
     "data",
@@ -65,13 +64,11 @@ def converter_tempo(valor: str) -> int:
 
     return minutos
 
-
 def converter_status(status: str) -> str:
     return status.lower().strip().capitalize()
 
-
 # Validação do registro completo
-def validar_registro(registro: dict, categorias: dict) -> dict:
+def validar_registro(registro: dict) -> dict:
     """Valida uma linha do CSV e devolve o registro já convertido.
 
     Returns:
@@ -96,13 +93,11 @@ def validar_registro(registro: dict, categorias: dict) -> dict:
     if not email_valido(email):
         raise EmailInvalidoError(email)
 
-    categoria_bruta = (registro.get("categoria") or "").strip() or None
-
     return {
         "protocolo": campos["protocolo"].upper(),
         "data": converter_data(campos["data"]),
         "email": email,
-        "categoria": mapear_categoria(categoria_bruta, categorias),
+        "categoria": (registro.get("categoria") or "").strip(),
         "status": converter_status(campos["status"]),
         "tempo_minutos": converter_tempo(campos["tempo_minutos"]),
         "descricao": (registro.get("descricao") or "").strip(),

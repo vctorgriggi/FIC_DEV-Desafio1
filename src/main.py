@@ -59,7 +59,7 @@ def configurar_logger(caminho_log: Path) -> logging.Logger:
 
 
 # Etapa de validação
-def validar_todos(registros: list[dict], categorias: dict) -> tuple[list[dict], list[dict]]:
+def validar_todos(registros: list[dict]) -> tuple[list[dict], list[dict]]:
     """Valida a lista inteira sem deixar uma linha ruim derrubar a execução.
 
     Returns:
@@ -73,7 +73,7 @@ def validar_todos(registros: list[dict], categorias: dict) -> tuple[list[dict], 
     # start=2 porque a linha 1 do arquivo é o cabeçalho
     for linha, registro in enumerate(registros, start=2):
         try:
-            atendimento = validar_registro(registro, categorias)
+            atendimento = validar_registro(registro)
 
         except RegistroInvalidoError as e:
             protocolo = (registro.get("protocolo") or "?").strip()
@@ -129,7 +129,9 @@ def exibir_resumo_validacao(validos: list[dict], rejeitados: list[dict]) -> None
 def exibir_resumo_tratamento(antes: int, df_tratado) -> None:
     sep = "=" * 70
     depois = len(df_tratado)
-    nao_classificados = int((df_tratado["categoria"] == processamento.CATEGORIA_PADRAO).sum())
+    nao_classificados = int(
+        (df_tratado["categoria"] == processamento.CATEGORIA_PADRAO).sum()
+    )
 
     print(sep)
     print(" TRATAMENTO DOS DADOS")
@@ -184,7 +186,7 @@ def main() -> None:
     logger.info("%d categorias oficiais carregadas", len(categorias))
     logger.info("%d linhas lidas do CSV", len(brutos))
 
-    validos, rejeitados = validar_todos(brutos, categorias)
+    validos, rejeitados = validar_todos(brutos)
     logger.info("%d válidos, %d rejeitados", len(validos), len(rejeitados))
     exibir_resumo_validacao(validos, rejeitados)
 
@@ -197,24 +199,24 @@ def main() -> None:
     texto = leitura.ler_observacoes(caminhos["observacoes"])
     protocolos = leitura.extrair_protocolos(texto)
     telefones = leitura.extrair_telefones(texto)
-    
+
     # Registra o número de protocolos e telefones extraídos.
     logger.info(
         "Observações: %d protocolos e %d telefones extraídos",
         len(protocolos),
         len(telefones),
     )
-    
+
     exibir_observacoes(protocolos, telefones)
 
+    estatisticas = processamento.calcular_estatisticas(
+        df_tratado, len(rejeitados), len(validos)
+    )
+    relatorios.gerar_json(estatisticas, caminhos["saida"] / "estatisticas.json")
+    
     print(f"Log de advertências gravado em: {caminhos['saida'] / 'erros.log'}")
     logger.info("=== Fim da execução ===")
 
-    df = processamento.eliminar_duplicatas(validos)
-    print(df)
-    logger.info("%d atendimentos únicos", len(df))
-
-    
 
 if __name__ == "__main__":
     main()

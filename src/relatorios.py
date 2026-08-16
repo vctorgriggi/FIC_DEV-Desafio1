@@ -1,3 +1,4 @@
+import json
 import logging
 from pathlib import Path
 
@@ -59,7 +60,9 @@ def grafico_atendimentos_por_categoria(df: pd.DataFrame, destino: Path) -> Path:
     _estilizar_eixo(ax)
     _rotular_barras(ax, contagem.values)
 
-    ax.set_title("Atendimentos por categoria", fontsize=13, color=TINTA_PRIMARIA, pad=14)
+    ax.set_title(
+        "Atendimentos por categoria", fontsize=13, color=TINTA_PRIMARIA, pad=14
+    )
     ax.set_xlabel("Quantidade de atendimentos", fontsize=10, color=TINTA_MUTED)
 
     fig.tight_layout()
@@ -81,7 +84,10 @@ def grafico_distribuicao_status(df: pd.DataFrame, destino: Path) -> Path:
     _rotular_barras(ax, contagem.values)
 
     ax.set_title(
-        "Distribuição dos atendimentos por status", fontsize=13, color=TINTA_PRIMARIA, pad=14
+        "Distribuição dos atendimentos por status",
+        fontsize=13,
+        color=TINTA_PRIMARIA,
+        pad=14,
     )
     ax.set_xlabel("Quantidade de atendimentos", fontsize=10, color=TINTA_MUTED)
 
@@ -108,7 +114,10 @@ def grafico_tempo_medio_por_categoria(df: pd.DataFrame, destino: Path) -> Path:
     _rotular_barras(ax, medias.values, sufixo=" min")
 
     ax.set_title(
-        "Tempo médio de atendimento por categoria", fontsize=13, color=TINTA_PRIMARIA, pad=14
+        "Tempo médio de atendimento por categoria",
+        fontsize=13,
+        color=TINTA_PRIMARIA,
+        pad=14,
     )
     ax.set_xlabel("Minutos (média)", fontsize=10, color=TINTA_MUTED)
 
@@ -129,10 +138,24 @@ def gerar_graficos(df: pd.DataFrame, diretorio: Path) -> list[Path]:
     diretorio.mkdir(parents=True, exist_ok=True)
 
     caminhos = [
-        grafico_atendimentos_por_categoria(df, diretorio / "atendimentos_por_categoria.png"),
+        grafico_atendimentos_por_categoria(
+            df, diretorio / "atendimentos_por_categoria.png"
+        ),
         grafico_distribuicao_status(df, diretorio / "distribuicao_status.png"),
-        grafico_tempo_medio_por_categoria(df, diretorio / "tempo_medio_por_categoria.png"),
+        grafico_tempo_medio_por_categoria(
+            df, diretorio / "tempo_medio_por_categoria.png"
+        ),
     ]
 
     logger.info("%d gráfico(s) gerado(s) em %s", len(caminhos), diretorio)
     return caminhos
+
+
+def gerar_json(data: dict, destino: Path) -> Path:
+    """Gera um arquivo JSON com os dados."""
+
+    with open(destino, "w", encoding="utf-8") as arquivo:
+        json.dump(data, arquivo, indent=4, ensure_ascii=False)
+
+    logger.info("Arquivo JSON salvo: %s", destino)
+    return destino
