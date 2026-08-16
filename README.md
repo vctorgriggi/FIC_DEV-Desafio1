@@ -74,20 +74,20 @@ O que dá pra aproveitar, aproveitamos, registrando advertência no log:
 [✓] - Validação
   > Cada registro deverá ser classificado como válido ou inválido. A aplicação deverá apresentar o motivo da rejeição de registros inválidos.
 
-[ ] - Tratamento dos dados
+[✓] - Tratamento dos dados
   > O sistema deverá:
   
-    - [] remover espaços desnecessários;
-    - [] uniformizar maiúsculas e minúsculas;
-    - [] padronizar categorias;
-    - [] converter datas;
-    - [] tratar valores ausentes;
-    - [] eliminar duplicidades pelo protocolo.
+    - [✓] remover espaços desnecessários;
+    - [✓] uniformizar maiúsculas e minúsculas;
+    - [✓] padronizar categorias;
+    - [✓] converter datas;
+    - [✓] tratar valores ausentes;
+    - [✓] eliminar duplicidades pelo protocolo.
 
 [ ] - Análise
   > O sistema deverá produzir indicadores estatísticos utilizando Pandas e NumPy.
 
-[] - Visualização
+[✓] - Visualização
   > O sistema deverá gerar e salvar pelo menos dois gráficos em formato PNG.
 
 [] - Exportação
