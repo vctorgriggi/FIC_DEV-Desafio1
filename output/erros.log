@@ -1,10 +1,10 @@
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 11 (SUP-2026-0010) rejeitada: e-mail 'email-invalido' em formato inválido
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 21 (SUP-2026-0020) rejeitada: data '31/02/2026' em formato não reconhecido
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 31 (SUP-2026-0030) rejeitada: tempo '-15' inválido, esperado minutos > 0
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 61 (SUP-2026-0060) rejeitada: campo 'email' obrigatório e vazio
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 71 (SUP-2026-0070) rejeitada: tempo 'muito' inválido, esperado minutos > 0
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 81: protocolo 'PROTOCOLO-80' fora do padrão SUP-AAAA-NNNN
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 91 (SUP-2026-0090) rejeitada: campo 'data' obrigatório e vazio
-2026-08-16 19:56:09 | WARNING  | suporte.validacao | Linha 121 (SUP-2026-0120) rejeitada: e-mail 'nome@dominio' em formato inválido
-2026-08-16 19:56:09 | WARNING  | suporte.processamento | 2 atendimento(s) com categoria sem correspondência -> 'Não classificada'
-2026-08-16 19:56:09 | WARNING  | suporte.processamento | 1 protocolo(s) duplicado(s) removido(s), mantida a primeira ocorrência
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 11 (SUP-2026-0010) rejeitada: e-mail 'email-invalido' em formato inválido
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 21 (SUP-2026-0020) rejeitada: data '31/02/2026' em formato não reconhecido
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 31 (SUP-2026-0030) rejeitada: tempo '-15' inválido, esperado minutos > 0
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 61 (SUP-2026-0060) rejeitada: campo 'email' obrigatório e vazio
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 71 (SUP-2026-0070) rejeitada: tempo 'muito' inválido, esperado minutos > 0
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 81: protocolo 'PROTOCOLO-80' fora do padrão SUP-AAAA-NNNN
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 91 (SUP-2026-0090) rejeitada: campo 'data' obrigatório e vazio
+2026-08-16 20:03:51 | WARNING  | suporte.validacao | Linha 121 (SUP-2026-0120) rejeitada: e-mail 'nome@dominio' em formato inválido
+2026-08-16 20:03:51 | WARNING  | suporte.processamento | 2 atendimento(s) com categoria sem correspondência -> 'Não classificada'
+2026-08-16 20:03:51 | WARNING  | suporte.processamento | 1 protocolo(s) duplicado(s) removido(s), mantida a primeira ocorrência
