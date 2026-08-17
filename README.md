@@ -78,9 +78,18 @@ O resto a gente aproveita e registra advertência no log:
   `Não classificada`
 - protocolo repetido: fica só a primeira ocorrência
 
-Sobre a normalização: usamos min-max sobre `tempo_minutos`, então o registro de
-2000 minutos empurra os outros para o começo da escala. É o efeito esperado de
-manter um outlier, e dá pra ver ele isolado no boxplot.
+Manter esse registro de 2000 minutos tem duas consequências visíveis, e as duas
+são propositais:
+
+Na normalização, que é min-max sobre `tempo_minutos`, ele empurra todos os
+outros para o começo da escala.
+
+No gráfico de tempo médio, ele cai em `Instalação de programas` e sozinho leva a
+média da categoria de 86 para 260 minutos, em 11 atendimentos resolvidos. A
+barra dá a impressão de que instalação é disparado o pior atendimento, e não é.
+Mantivemos a média porque é o indicador que o enunciado pede, e o boxplot ao
+lado existe justamente para mostrar o ponto isolado que a média esconde. Os dois
+gráficos precisam ser lidos juntos.
 
 ## Uso de ferramentas de IA
 
