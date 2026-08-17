@@ -37,31 +37,62 @@ pip install -r requirements.txt
 python -m src.main
 ```
 
-Saídas em `output/`. Para rodar os testes: `python -m pytest`.
+Testes:
+
+```bash
+pytest
+```
+
+## Arquivos gerados
+
+Tudo vai para `output/`:
+
+- `atendimentos_processados.csv` — os registros já limpos e sem duplicidade
+- `resumo.json` — os indicadores
+- `erros.log` — o motivo de cada recusa
+- `graficos/` — os PNGs
+
+## Números da última execução
+
+Das 150 linhas do CSV, 143 passaram na validação e 7 foram recusadas. Depois de remover o protocolo duplicado sobraram 142 atendimentos.
 
 ## Decisões para tratar dados inválidos
 
-São obrigatórios `protocolo`, `data`, `email`, `categoria`, `status` e `tempo_minutos`; `descricao` é opcional. Recusamos o registro quando o dado não tem conserto:
+São obrigatórios `protocolo`, `data`, `email`, `status` e `tempo_minutos`. `categoria` e `descricao` são opcionais.
 
-- campo obrigatório vazio;
-- e-mail sem domínio ou sem TLD (`email-invalido`, `nome@dominio`);
-- data que não existe no calendário (`31/02/2026`);
-- tempo não numérico (`muito`) ou menor que 1 minuto (`-15`).
+Recusamos o registro quando o dado não tem conserto:
 
-O que dá pra aproveitar, aproveitamos, registrando advertência no log:
+- campo obrigatório vazio
+- e-mail sem domínio ou sem TLD, como `email-invalido` e `nome@dominio`
+- data que não existe no calendário, como `31/02/2026`
+- tempo não numérico (`muito`) ou menor que 1 minuto (`-15`)
 
-- **data em 4 formatos diferentes** — convertida para `AAAA-MM-DD`;
-- **protocolo fora do padrão** (`PROTOCOLO-80`) — o atendimento aconteceu, o
-  que está errado é a formatação; descartar perderia um dado real;
-- **tempo muito alto** (`2000`) — atendimento demorado ainda é atendimento, e
-  ele importa justamente na normalização com NumPy;
-- **categoria sem correspondência** no `categorias.json` — entra como
-  `Não classificada`;
-- **protocolo repetido** (`SUP-2026-0001`) — fica só a primeira ocorrência.
+O resto a gente aproveita e registra advertência no log:
+
+- as datas vêm em 4 formatos diferentes e todas viram `AAAA-MM-DD`
+- protocolo fora do padrão, como `PROTOCOLO-80`: o atendimento existiu, o
+  errado é só a formatação, então descartar perderia um dado real
+- tempo muito alto, como os 2000 minutos: atendimento demorado ainda é
+  atendimento, e ele aparece como outlier na normalização
+- categoria que não bate com nenhum sinônimo do `categorias.json` vira
+  `Não classificada`
+- protocolo repetido: fica só a primeira ocorrência
+
+Sobre a normalização: usamos min-max sobre `tempo_minutos`, então o registro de
+2000 minutos empurra os outros para o começo da escala. É o efeito esperado de
+manter um outlier, e dá pra ver ele isolado no boxplot.
 
 ## Uso de ferramentas de IA
 
-> Definir
+> A preencher antes da entrega, com o que cada um usou.
+
+**Ferramenta:**
+
+**Para quê:**
+
+**Exemplos de prompt:**
+
+**O que a gente revisou ou mudou depois:**
 
 ## Requisitos Funcionais
 
@@ -76,7 +107,7 @@ O que dá pra aproveitar, aproveitamos, registrando advertência no log:
 
 [✓] - Tratamento dos dados
   > O sistema deverá:
-  
+
     - [✓] remover espaços desnecessários;
     - [✓] uniformizar maiúsculas e minúsculas;
     - [✓] padronizar categorias;
@@ -92,10 +123,10 @@ O que dá pra aproveitar, aproveitamos, registrando advertência no log:
 
 [✓] - Exportação
   > O sistema deverá gerar:
-  
+
   - [✓] um CSV com os dados tratados;
   - [✓] um JSON com o resumo dos indicadores;
   - [✓] um arquivo de log com os problemas encontrados.
 
-[] - Tolerância a falhas
+[✓] - Tolerância a falhas
   > A ocorrência de uma linha inválida não poderá encerrar toda a aplicação.
