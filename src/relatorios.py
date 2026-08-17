@@ -80,7 +80,11 @@ def grafico_atendimentos_por_categoria(df: pd.DataFrame, destino: Path) -> Path:
 
 
 def grafico_tempo_medio_por_categoria(df: pd.DataFrame, destino: Path) -> Path:
-    """Gera o gráfico de barras com o tempo médio (min) de atendimento por categoria."""
+    """Gera o gráfico de barras com o tempo médio (min) por categoria.
+
+    Considera só o status resolvido: em atendimento aberto o tempo ainda
+    está correndo, e entrar na média puxaria ela para baixo.
+    """
     medias = (
         df.loc[df["status"] == "resolvido"]
         .groupby("categoria")["tempo_minutos"]
@@ -95,7 +99,7 @@ def grafico_tempo_medio_por_categoria(df: pd.DataFrame, destino: Path) -> Path:
     _rotular_barras(ax, medias.values, sufixo=" min")
 
     ax.set_title(
-        "Tempo médio de atendimento por categoria",
+        "Tempo médio por categoria, só dos atendimentos resolvidos",
         fontsize=13,
         color=TINTA_PRIMARIA,
         pad=14,
