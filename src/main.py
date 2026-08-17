@@ -213,8 +213,10 @@ def main() -> None:
         df_tratado, len(rejeitados), len(brutos)
     )
     
-    relatorios.gerar_json(estatisticas, caminhos["saida"] / "estatisticas.json")
-    relatorios.gerar_csv(df_tratado, caminhos["saida"] / "atendimentos.csv")
+    relatorios.gerar_json(estatisticas, caminhos["saida"] / "resumo.json")
+    relatorios.gerar_csv(
+        df_tratado, caminhos["saida"] / "atendimentos_processados.csv"
+    )
     
     print(f"Log de advertências gravado em: {caminhos['saida'] / 'erros.log'}")
     logger.info("=== Fim da execução ===")

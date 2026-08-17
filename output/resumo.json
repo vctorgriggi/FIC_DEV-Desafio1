@@ -17,6 +17,8 @@
         "em andamento": 42
     },
     "tempo_medio_de_atendimento": 108.26760563380282,
+    "tempo_mediano_de_atendimento": 95.0,
+    "desvio_padrao_do_tempo": 167.52472659588963,
     "tempo_medio_por_categoria": {
         "Acesso ao AVA": 104.3,
         "Configuração do Python": 91.66666666666667,
