@@ -99,16 +99,26 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
     return df
 
 
-def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos: int) -> dict:
+def calcular_estatisticas(
+    df: pd.DataFrame, rejeitados: int, lidos: int, validos: int
+) -> dict:
     """Calcula estatísticas sobre o DataFrame tratado.
+
+    Args:
+        df: DataFrame já tratado e sem duplicidades.
+        rejeitados: Registros recusados na validação.
+        lidos: Linhas lidas do CSV.
+        validos: Registros aprovados na validação, antes da deduplicação.
 
     Returns:
         Dicionário com as estatísticas calculadas.
     """
+    # lidos - rejeitados - duplicados = total, e as quatro chaves fecham na leitura
     estatisticas = {
         "atendimentos_lidos": lidos,
         "atendimentos_rejeitados": rejeitados,
-        "atendimentos_validos": len(df),
+        "atendimentos_validos": validos,
+        "atendimentos_duplicados": validos - len(df),
     }
 
     # Quantidade total de atendimentos;
@@ -137,6 +147,13 @@ def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos: int) -> dict
 
     # Percentual de atendimentos rejeitados;
     estatisticas["percentual_de_atendimentos_rejeitados"] = (rejeitados / lidos) * 100
+
+    # Aceitos, mas com categoria que não bateu com o categorias.json;
+    incompletos = int((df["categoria"] == CATEGORIA_PADRAO).sum())
+    estatisticas["atendimentos_incompletos"] = incompletos
+    estatisticas["percentual_de_invalidos_ou_incompletos"] = (
+        (rejeitados + incompletos) / lidos
+    ) * 100
 
     # Categoria mais frequente;
     estatisticas["categoria_mais_frequente"] = df["categoria"].value_counts().idxmax()

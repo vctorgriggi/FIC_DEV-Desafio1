@@ -210,7 +210,7 @@ def main() -> None:
     exibir_observacoes(protocolos, telefones)
 
     estatisticas = processamento.calcular_estatisticas(
-        df_tratado, len(rejeitados), len(brutos)
+        df_tratado, len(rejeitados), len(brutos), len(validos)
     )
     
     relatorios.gerar_json(estatisticas, caminhos["saida"] / "resumo.json")
