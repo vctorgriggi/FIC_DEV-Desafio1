@@ -1,3 +1,11 @@
+"""FIC_DEV — Módulo Python para IA — Desafio 1
+
+Equipe: Felipe Ferreira Aguiar · Líbia Canhete Alves e Cruz · Victor Griggi Moreira Regis da Silva
+Turma: Noturno
+
+Geração dos gráficos com Matplotlib e exportação do CSV e do JSON.
+"""
+
 import csv
 import json
 import logging

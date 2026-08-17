@@ -1,3 +1,12 @@
+"""FIC_DEV — Módulo Python para IA — Desafio 1
+
+Equipe: Felipe Ferreira Aguiar · Líbia Canhete Alves e Cruz · Victor Griggi Moreira Regis da Silva
+Turma: Noturno
+
+Ponto de entrada: orquestra a leitura, a validação, o tratamento, a análise
+e a exportação, e configura o log.
+"""
+
 import logging
 import sys
 from pathlib import Path

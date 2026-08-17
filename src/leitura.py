@@ -1,3 +1,11 @@
+"""FIC_DEV — Módulo Python para IA — Desafio 1
+
+Equipe: Felipe Ferreira Aguiar · Líbia Canhete Alves e Cruz · Victor Griggi Moreira Regis da Silva
+Turma: Noturno
+
+Leitura da configuração e dos arquivos de entrada (CSV, JSON e TXT).
+"""
+
 import csv
 import json
 import logging
