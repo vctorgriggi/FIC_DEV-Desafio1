@@ -93,15 +93,22 @@ gráficos precisam ser lidos juntos.
 
 ## Uso de ferramentas de IA
 
-> A preencher antes da entrega, com o que cada um usou.
+**Ferramenta:** Claude (Anthropic).
 
-**Ferramenta:**
+**Finalidade:** escrita de docstrings e da documentação, revisão da qualidade
+dos testes, sugestão de gráficos e indicadores, e escrita e revisão de parte do
+código dos módulos.
 
-**Para quê:**
+**Exemplos de solicitações:**
 
-**Exemplos de prompt:**
+- explicação sobre parâmetros do Matplotlib
+- revisão dos testes, para saber se cobriam alguma coisa de fato
+- sugestão de indicadores além dos que o enunciado lista
+- ajuda para interpretar mensagem de erro do Pandas
 
-**O que a gente revisou ou mudou depois:**
+**O que revisamos ou mudamos:** as regras de validação são decisão nossa e
+contrariam a sugestão inicial da ferramenta, que rejeitava registros demais.
+Todo resultado apontado na revisão foi conferido rodando o programa.
 
 ## Requisitos Funcionais
 
