@@ -52,6 +52,7 @@ profile_default/
 ipython_config.py
 
 *.log
+!output/erros.log
 *.sqlite3
 *.sqlite3-journal
 local_settings.py
