@@ -114,6 +114,12 @@ def exibir_resumo_validacao(validos: list[dict], rejeitados: list[dict]) -> None
     print(" LEITURA E VALIDAÇÃO DOS ATENDIMENTOS")
     print(sep)
     print(f" Linhas lidas         : {total}")
+
+    if total == 0:
+        print(" Nenhum registro para analisar.")
+        print(f"{sep}\n")
+        return
+
     print(f" Registros válidos    : {len(validos)} ({len(validos) / total:.1%})")
     print(f" Registros rejeitados : {len(rejeitados)} ({len(rejeitados) / total:.1%})")
 
@@ -189,6 +195,11 @@ def main() -> None:
     validos, rejeitados = validar_todos(brutos)
     logger.info("%d válidos, %d rejeitados", len(validos), len(rejeitados))
     exibir_resumo_validacao(validos, rejeitados)
+
+    if not validos:
+        logger.error("Nenhum registro válido, análise interrompida")
+        print("Nenhum registro válido para analisar. Confira o erros.log.")
+        return
 
     df_tratado = processamento.tratar_dados(validos, categorias)
     exibir_resumo_tratamento(len(validos), df_tratado)
