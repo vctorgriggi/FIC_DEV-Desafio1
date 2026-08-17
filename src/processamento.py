@@ -30,6 +30,21 @@ def padronizar_categoria(categoria: str, mapa: dict) -> str:
     return mapa.get(categoria.strip().lower(), CATEGORIA_PADRAO)
 
 
+def normalizar_tempos(tempos: np.ndarray) -> np.ndarray:
+    """Reescala os tempos para o intervalo [0, 1] pelo mínimo e máximo.
+
+    Returns:
+        Array normalizado, ou tudo zero se todos os tempos forem iguais.
+    """
+    minimo = tempos.min()
+    amplitude = tempos.max() - minimo
+
+    if amplitude == 0:
+        return np.zeros_like(tempos)
+
+    return (tempos - minimo) / amplitude
+
+
 def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
     """Limpa e padroniza os atendimentos já validados.
 
@@ -48,6 +63,7 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
 
     df["protocolo"] = df["protocolo"].str.upper()
     df["email"] = df["email"].str.lower()
+    df["status"] = df["status"].str.lower()
 
     df["descricao"] = df["descricao"].replace("", np.nan).fillna("Sem descrição")
 
@@ -72,6 +88,10 @@ def tratar_dados(registros: list[dict], categorias: dict) -> pd.DataFrame:
             "%d protocolo(s) duplicado(s) removido(s), mantida a primeira ocorrência",
             duplicados,
         )
+
+    df["tempo_normalizado"] = normalizar_tempos(
+        df["tempo_minutos"].to_numpy(dtype=float)
+    ).round(4)
 
     logger.info(
         "Tratamento concluído: %d atendimento(s) após limpeza e deduplicação", len(df)
@@ -104,6 +124,11 @@ def calcular_estatisticas(df: pd.DataFrame, rejeitados: int, lidos: int) -> dict
 
     # Tempo médio de atendimento;
     estatisticas["tempo_medio_de_atendimento"] = df["tempo_minutos"].mean()
+
+    # Mediana e desvio padrão do tempo, com NumPy;
+    tempos = df["tempo_minutos"].to_numpy(dtype=float)
+    estatisticas["tempo_mediano_de_atendimento"] = float(np.median(tempos))
+    estatisticas["desvio_padrao_do_tempo"] = float(np.std(tempos))
 
     # Tempo médio de atendimento por categoria;
     estatisticas["tempo_medio_por_categoria"] = (
